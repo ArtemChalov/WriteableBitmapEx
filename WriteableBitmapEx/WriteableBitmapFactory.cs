@@ -18,25 +18,8 @@ namespace WriteableBitmapEx
         /// <returns>The instance of the WriteableBitmap class</returns>
         public static WriteableBitmap CreateFromFile(string filePath)
         {
-            BitmapImage bmpImage = new BitmapImage();
-            WriteableBitmap wBitmap = null;
-            try
-            {
-                bmpImage.BeginInit();
-                bmpImage.UriSource = new Uri(filePath);
-                bmpImage.EndInit();
-
-                wBitmap = new WriteableBitmap(bmpImage);
-            }
-            catch
-            {
-                MessageBox.Show("Файл имеет не верный формат\nили поврежден.", "Ошибка открытия файла", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
-            finally
-            {
-                bmpImage = null;
-            }
-            return wBitmap;
+            BitmapImage bmpImage = BitmapImageFactory.CreateFromFile(filePath);
+            return new WriteableBitmap(bmpImage);
         }
 
         /// <summary>
