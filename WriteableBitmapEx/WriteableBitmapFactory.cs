@@ -6,31 +6,34 @@ using System.Windows.Media.Imaging;
 
 namespace WriteableBitmapEx
 {
+    /// <summary>
+    /// Exposes static methods for create an instance of the WriteableBitmap class.
+    /// </summary>
     public class WriteableBitmapFactory
     {
+        /// <summary>
+        /// Create a new instance of the WriteableBitmap class.
+        /// </summary>
+        /// <param name="filePath">Full path of the file.</param>
+        /// <returns>The instance of the WriteableBitmap class</returns>
         public static WriteableBitmap CreateFromFile(string filePath)
         {
             BitmapImage bmpImage = new BitmapImage();
             WriteableBitmap wBitmap = null;
             try
             {
-                using (var fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read))
-                {
-                    bmpImage.BeginInit();
-                    bmpImage.CacheOption = BitmapCacheOption.OnLoad;
-                    bmpImage.StreamSource = fs;
-                    bmpImage.EndInit();
-                }
+                bmpImage.BeginInit();
+                bmpImage.UriSource = new Uri(filePath);
+                bmpImage.EndInit();
 
                 wBitmap = new WriteableBitmap(bmpImage);
             }
             catch
             {
-                MessageBox.Show("Файл имеет не верный формат\nили поврежден.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Файл имеет не верный формат\nили поврежден.", "Ошибка открытия файла", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             finally
             {
-                bmpImage.StreamSource = null;
                 bmpImage = null;
             }
             return wBitmap;
