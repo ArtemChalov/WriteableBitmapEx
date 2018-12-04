@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Media.Imaging;
 
 namespace WriteableBitmapEx
 {
@@ -11,6 +9,28 @@ namespace WriteableBitmapEx
     /// </summary>
     public static class BitmapImageFactory
     {
+        /// <summary>
+        /// Create a new instance of the BitmapImage class.
+        /// </summary>
+        /// <param name="filePath">Full path of the file.</param>
+        /// <returns>The instance of the BitmapImage class</returns>
+        public static BitmapImage CreateFromFile(string filePath)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            try
+            {
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.UriSource = new Uri(filePath);
+                bitmap.EndInit();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Файл имеет не верный формат\nили поврежден.", "Ошибка открытия файла", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return bitmap;
+        }
 
     }
 }
