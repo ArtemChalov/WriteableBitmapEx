@@ -31,23 +31,10 @@ namespace WriteableBitmapEx
         {
             WriteableBitmap wBitmap = null;
             return Task.Factory.StartNew(() => {
-                BitmapImage bmpImage = new BitmapImage();
-                try
-                {
-                    bmpImage.BeginInit();
-                    bmpImage.UriSource = new Uri(filePath);
-                    bmpImage.EndInit();
-                    wBitmap = new WriteableBitmap(bmpImage);
-                    wBitmap.Freeze();
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Файл имеет не верный формат\nили поврежден.", "Ошибка открытия файла", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
-                finally
-                {
-                    bmpImage = null;
-                }
+                BitmapImage bmpImage = BitmapImageFactory.CreateFromFile(filePath);
+
+                wBitmap = new WriteableBitmap(bmpImage);
+                wBitmap.Freeze();
 
                 return wBitmap;
             });
