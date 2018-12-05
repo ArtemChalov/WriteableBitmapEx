@@ -79,16 +79,20 @@ namespace WriteableBitmapEx
         /// Create a new resized instance of the BitmapImage class with desired width.
         /// </summary>
         /// <param name="filePath">Full path of the file.</param>
-        /// <param name="desiredWidth">Desired width.</param>
+        /// <param name="desiredSize">Desired width or height.</param>
+        /// <param name="kindOfSize">Desired kind of size to be used.</param>
         /// <returns>The instance of the BitmapImage class.</returns>
-        public static BitmapImage CreateThumbnailFromFile(string filePath, int desiredWidth)
+        public static BitmapImage CreateThumbnailFromFile(string filePath, int desiredSize, DesiredSize kindOfSize)
         {
             BitmapImage bitmap = new BitmapImage();
             try
             {
                 bitmap.BeginInit();
                 bitmap.CacheOption = BitmapCacheOption.OnLoad;
-                bitmap.DecodePixelWidth = desiredWidth;
+                if (kindOfSize == DesiredSize.Width)
+                    bitmap.DecodePixelWidth = desiredSize;
+                else
+                    bitmap.DecodePixelHeight = desiredSize;
                 bitmap.UriSource = new Uri(filePath);
                 bitmap.EndInit();
             }
