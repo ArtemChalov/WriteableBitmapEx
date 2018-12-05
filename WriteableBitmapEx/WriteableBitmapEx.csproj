@@ -69,6 +69,7 @@
       <DependentUpon>QualityDialogResult.xaml</DependentUpon>
     </Compile>
     <Compile Include="WriteableBitmapFactory.cs" />
+    <Compile Include="WriteableBitmapSaveEx.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="WindowDialogs\QualityDialogResult.xaml">
