@@ -14,7 +14,7 @@ namespace WriteableBitmapEx
         /// Create a new instance of the BitmapImage class.
         /// </summary>
         /// <param name="filePath">Full path of the file.</param>
-        /// <returns>The instance of the BitmapImage class</returns>
+        /// <returns>The instance of the BitmapImage class.</returns>
         public static BitmapImage CreateFromFile(string filePath)
         {
             BitmapImage bitmap = new BitmapImage();
@@ -37,7 +37,7 @@ namespace WriteableBitmapEx
         /// Create a new instance of the BitmapImage class asynchronously.
         /// </summary>
         /// <param name="filePath">Full path of the file.</param>
-        /// <returns>The instance of the BitmapImage class</returns>
+        /// <returns>The instance of the BitmapImage class.</returns>
         public static Task<BitmapImage> CreateFromFileAsync(string filePath)
         {
             BitmapImage bitmap = null;
@@ -58,6 +58,31 @@ namespace WriteableBitmapEx
 
                 return bitmap;
             });
+        }
+
+        /// <summary>
+        /// Create a new resized instance of the BitmapImage class with desired width.
+        /// </summary>
+        /// <param name="filePath">Full path of the file.</param>
+        /// <param name="desiredWidth">Desired width.</param>
+        /// <returns>The instance of the BitmapImage class.</returns>
+        public static BitmapImage CreateThumbnailFromFile(string filePath, int desiredWidth)
+        {
+            BitmapImage bitmap = new BitmapImage();
+            try
+            {
+                bitmap.BeginInit();
+                bitmap.CacheOption = BitmapCacheOption.OnLoad;
+                bitmap.DecodePixelWidth = desiredWidth;
+                bitmap.UriSource = new Uri(filePath);
+                bitmap.EndInit();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Файл имеет не верный формат\nили поврежден.", "Ошибка открытия файла", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+
+            return bitmap;
         }
     }
 }
