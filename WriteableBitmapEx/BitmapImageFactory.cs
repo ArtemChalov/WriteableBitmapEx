@@ -6,6 +6,21 @@ using System.Windows.Media.Imaging;
 namespace WriteableBitmapEx
 {
     /// <summary>
+    /// Used in some methods is affect to method logic.
+    /// </summary>
+    public enum DesiredSize
+    {
+        /// <summary>
+        /// Width is used in a method logic
+        /// </summary>
+        Width = 0,
+        /// <summary>
+        /// Height is used in a method logic
+        /// </summary>
+        Height = 1
+    }
+
+    /// <summary>
     /// Exposes static methods for create an instance of the BitmapImage class.
     /// </summary>
     public static class BitmapImageFactory
