@@ -57,6 +57,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
@@ -64,7 +65,16 @@
     <Compile Include="Convertors\QualityInfoConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValidationRules\SizeValidationRules.cs" />
+    <Compile Include="WindowDialogs\QualityDialogResult.xaml.cs">
+      <DependentUpon>QualityDialogResult.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WriteableBitmapFactory.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="WindowDialogs\QualityDialogResult.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
