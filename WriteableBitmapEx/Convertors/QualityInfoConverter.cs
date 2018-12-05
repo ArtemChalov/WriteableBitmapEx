@@ -5,7 +5,7 @@ using System.Windows.Data;
 namespace WriteableBitmapEx.Convertors
 {
     /// <summary>
-    /// Implements the IValueConverter interface
+    /// Implement the IValueConverter interface.
     /// </summary>
     public class QualityInfoConverter: IValueConverter
     {
